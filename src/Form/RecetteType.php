@@ -41,14 +41,14 @@ class RecetteType extends AbstractType
             ->add('photo', FileType::class, [
                 'label' => 'Photo de la recette',
                 'required' => true,
-                'mapped' => false, // Empêche une erreur de mapping avec l'entité
+                'mapped' => false, 
                 'attr' => ['class' => 'form-control shadow-sm'],
                 'constraints' => [
                     new File([
-                        'maxSize' => '10M',
-                        'maxSizeMessage' => 'Le fichier est trop volumineux (10 Mo max)',
-                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/jpg'],
-                        'mimeTypesMessage' => 'Seuls les fichiers JPEG, PNG et JPG sont autorisés',
+                        'maxSize' => '10M', 
+                        'maxSizeMessage' => 'Le fichier est trop volumineux (10 Mo max).',
+                        'mimeTypes' => ['image/jpeg', 'image/png', 'image/jpg'], 
+                        'mimeTypesMessage' => 'Seuls les fichiers JPEG, PNG et JPG sont autorisés.',
                     ])
                 ]
             ])

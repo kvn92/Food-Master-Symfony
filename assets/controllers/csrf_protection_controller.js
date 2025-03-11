@@ -10,7 +10,7 @@ document.addEventListener('submit', function (event) {
 // The `framework.csrf_protection.check_header` config option needs to be enabled for the header to be checked
 document.addEventListener('turbo:submit-start', function (event) {
     const h = generateCsrfHeaders(event.detail.formSubmission.formElement);
-    Object.keys(h).map(function (k) {
+    Object.keys(h).forEach(function (k) {
         event.detail.formSubmission.fetchRequest.headers[k] = h[k];
     });
 });

@@ -1,6 +1,0 @@
-projectKey=sonarqube-jenkins
-serverUrl=http://localhost:9001
-serverVersion=24.12.0.100206
-dashboardUrl=http://localhost:9001/dashboard?id=sonarqube-jenkins
-ceTaskId=70ebe77a-15ab-46c7-9848-53081d670bbd
-ceTaskUrl=http://localhost:9001/api/ce/task?id=70ebe77a-15ab-46c7-9848-53081d670bbd
