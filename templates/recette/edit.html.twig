@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ titrePage }} {% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4 text-primary">{{ titrePage }}</h1>
+
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+
+        {# 🟢 SECTION 1 : INFORMATIONS GÉNÉRALES #}
+        <fieldset class="mb-4">
+            <legend class="text-secondary fs-5 fw-semibold">Informations générales</legend>
+
+            <div class="mb-3">
+                {{ form_label(form.titre, 'Titre de la recette', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                {{ form_widget(form.titre, {'attr': {'class': 'form-control shadow-sm'}}) }}
+                <div class="text-danger small">{{ form_errors(form.titre) }}</div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.photo, 'Ajouter une photo', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                {{ form_widget(form.photo, {'attr': {'class': 'form-control shadow-sm'}}) }}
+                <div class="text-danger small">{{ form_errors(form.photo) }}</div>
+            </div>
+        </fieldset>
+
+        {# 🟡 SECTION 2 : DÉTAILS DE LA RECETTE #}
+        <fieldset class="mb-4">
+            <legend class="text-secondary fs-5 fw-semibold">Détails de la recette</legend>
+
+            <div class="mb-3">
+                {{ form_label(form.preparation, 'Préparation', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                {{ form_widget(form.preparation, {'attr': {'class': 'form-control shadow-sm', 'rows': 5}}) }}
+                <div class="text-danger small">{{ form_errors(form.preparation) }}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.duree, 'Durée', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                    {{ form_widget(form.duree, {'attr': {'class': 'form-control shadow-sm'}}) }}
+                    <div class="text-danger small">{{ form_errors(form.duree) }}</div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.niveau, 'Niveau de difficulté', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                    {{ form_widget(form.niveau, {'attr': {'class': 'form-select shadow-sm'}}) }}
+                    <div class="text-danger small">{{ form_errors(form.niveau) }}</div>
+                </div>
+            </div>
+        </fieldset>
+
+        {# 🔵 SECTION 3 : PRÉFÉRENCES ALIMENTAIRES #}
+        <fieldset class="mb-4">
+            <legend class="text-secondary fs-5 fw-semibold">Préférences alimentaires</legend>
+
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.repas, 'Type de repas', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                    {{ form_widget(form.repas, {'attr': {'class': 'form-select shadow-sm'}}) }}
+                    <div class="text-danger small">{{ form_errors(form.repas) }}</div>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    {{ form_label(form.viande, 'Type de viande', {'label_attr': {'class': 'form-label fw-semibold'}}) }}
+                    {{ form_widget(form.viande, {'attr': {'class': 'form-select shadow-sm'}}) }}
+                    <div class="text-danger small">{{ form_errors(form.viande) }}</div>
+                </div>
+            </div>
+        </fieldset>
+
+        {# 🔴 SECTION 4 : STATUT #}
+        <fieldset class="mb-4">
+            <legend class="text-secondary fs-5 fw-semibold">Statut de la recette</legend>
+
+            <div class="d-flex gap-3">
+                <div class="form-check">
+                    {{ form_widget(form.isActive.0, {'attr': {'class': 'form-check-input'}}) }}
+                    <label class="form-check-label" for="{{ form.isActive.vars.id }}_0">Inactif</label>
+                </div>
+                <div class="form-check">
+                    {{ form_widget(form.isActive.1, {'attr': {'class': 'form-check-input'}}) }}
+                    <label class="form-check-label" for="{{ form.isActive.vars.id }}_1">Actif</label>
+                </div>
+            </div>
+        </fieldset>
+
+        {# 🟣 SECTION 5 : VALIDATION #}
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary px-4 py-2">
+                <i class="fas fa-check-circle"></i> Enregistrer
+            </button>
+            <a href="{{ path('admin.recette.index') }}" class="btn btn-outline-secondary px-4 py-2 ms-2">
+                <i class="fas fa-arrow-left"></i> Retour
+            </a>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,272 @@
+/* =================== TYPOGRAPHIE & GÉNÉRAL =================== */
+
+/* ✅ Assure une transition fluide des polices */
+html {
+    font-family: sans-serif;
+    font-display: swap; /* Évite le FOUT (Flash of Unstyled Text) */
+}
+
+/* ✅ Typographie principale */
+body {
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-size: clamp(15px, 1.1vw, 18px);
+    font-weight: normal;
+    line-height: 1.7;
+    color: #222;
+    background-color: #f8f9fa;
+}
+
+/* ✅ Titres avec adaptation dynamique */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Helvetica', sans-serif;
+}
+
+h1 { font-size: clamp(32px, 5vw, 36px); font-weight: 700; }
+h2 { font-size: clamp(26px, 4.5vw, 30px); font-weight: 600; }
+h3 { font-size: clamp(22px, 4vw, 26px); font-weight: 500; }
+h4 { font-size: clamp(18px, 3.5vw, 22px); font-weight: 500; }
+h5 { font-size: clamp(16px, 3vw, 18px); font-weight: 400; }
+h6 { font-size: clamp(14px, 2.5vw, 16px); font-weight: 400; }
+
+/* ✅ Liens */
+a {
+    color: #DB3512;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+    color: #A0250E;
+}
+
+/* =================== NAVBAR =================== */
+
+/* ✅ Style du navbar */
+.navbar {
+    background-color: #fff !important;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 10px 20px;
+}
+
+/* ✅ Bouton hamburger */
+.navbar-toggler {
+    border: none;
+    padding: 0.4rem 0.6rem;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba%280, 0, 0, 0.8%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+    transform: rotate(90deg);
+}
+
+/* ✅ Style des liens du menu */
+.navbar-nav .nav-item .nav-link {
+    font-weight: 600;
+    color: #DB3512;
+    padding: 0.8rem;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: white;
+}
+
+.navbtn:hover {
+    color: white;
+    background-color: #DB3512;
+    border-radius: 5px;
+}
+
+/* ✅ Dropdown menu */
+.dropdown-menu {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* =================== SECTION HERO =================== */
+
+.hero {
+    background: url('https://source.unsplash.com/1200x600/?food,recipe') no-repeat center center/cover;
+    height: 400px;
+    border-radius: 15px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    padding: 20px;
+}
+
+/* ✅ Boutons */
+.btn-primary {
+    background-color: #DB3512;
+    border-color: #DB3512;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+    background-color: #A0250E;
+    border-color: #A0250E;
+}
+
+/* =================== CARTES RECETTES =================== */
+
+.recipe-card {
+    transition: transform 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-card:hover {
+    transform: scale(1.03);
+}
+
+/* =================== IMAGES DES RECETTES =================== */
+.recipe-card .recipe-img {
+    width: 100%; /* Garantit que l’image s’adapte bien */
+    height: 200px; /* Hauteur fixe pour uniformiser toutes les cartes */
+    object-fit: cover; /* Garde l’image bien cadrée */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* =================== AVATAR UTILISATEUR =================== */
+.card-footer .user-avatar {
+    width: 40px; /* Taille fixe pour l’avatar */
+    height: 40px; /* Même hauteur pour éviter la distorsion */
+    border-radius: 50%; /* Rend l’image parfaitement ronde */
+    object-fit: cover; /* Ajuste l’image sans la déformer */
+    border: 2px solid #DB3512; /* Bordure subtile pour l’esthétique */
+}
+
+/* ✅ Alignement de l’avatar avec le pseudo */
+.card-footer .user-info {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espacement entre l’avatar et le pseudo */
+}
+
+.card-footer .user-info span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ✅ Alignement Avatar + Pseudo */
+.card-footer .d-flex.align-items-center {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Espace entre avatar et pseudo */
+}
+
+.card-footer .d-flex.align-items-center span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* ✅ Pied de carte */
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.likes {
+    display: flex;
+    align-items: center;
+    color: #FF6B6B;
+    font-weight: bold;
+}
+
+.likes i {
+    margin-right: 5px;
+}
+
+/* =================== FOOTER =================== */
+
+footer {
+    background: #DB3512;
+    padding: 20px;
+    text-align: center;
+    color: white;
+}
+
+
+
+/* =================== RESPONSIVE DESIGN =================== */
+
+@media (max-width: 992px) {
+    .navbar-nav {
+        text-align: center;
+    }
+
+    .navbar-collapse {
+        background: rgba(255, 255, 255, 0.95);
+        padding: 1rem;
+        border-radius: 12px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+
+    /* ✅ Ajustement des tailles de texte */
+    body {
+        font-size: 15px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    
+    /* ✅ Hero section plus petit */
+    .hero {
+        height: 300px;
+    }
+}
+
+/* ✅ Pour les petits écrans */
+@media (max-width: 576px) {
+    .hero {
+        height: 250px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+}
+

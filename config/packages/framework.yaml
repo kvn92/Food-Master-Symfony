@@ -1,0 +1,23 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+    csrf_protection: true
+    # Note that the session will be started ONLY if you read or write from it.
+    session: true
+
+ #Cela empêche le chargement de scripts externes (script-src 'self') et bloque le clickjacking (X-Frame-Options: DENY).   
+    http_client:
+        default_options:
+            headers:
+                Content-Security-Policy: "default-src 'self'; script-src 'self'"
+                X-Content-Type-Options: "nosniff"
+                X-Frame-Options: "DENY"
+                Referrer-Policy: "no-referrer"
+    #esi: true
+    #fragments: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

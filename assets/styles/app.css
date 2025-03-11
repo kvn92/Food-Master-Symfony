@@ -1,0 +1,56 @@
+body {
+    background-color: skyblue;
+}
+
+/* dashboard--> */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+.dashboard-container {
+    max-width: 1200px;
+    margin: 20px auto;
+}
+.section-box {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin-bottom: 40px;
+}
+.section-box h2 {
+    margin-bottom: 25px;
+}
+.card {
+    border-radius: 10px;
+    transition: 0.3s ease-in-out;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+.card a {
+    text-decoration: none;
+    color: inherit;
+}
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.card .icon {
+    font-size: 2rem;
+    color: #fff;
+}
+.bg-primary, .bg-success, .bg-warning, .bg-danger, .bg-info {
+    color: #fff !important;
+}
+
+h2 {
+font-size: 1.8rem;
+font-weight: bold;
+color: #343a40;
+margin-bottom: 25px;
+padding-bottom: 10px;
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Fin dashBoard */

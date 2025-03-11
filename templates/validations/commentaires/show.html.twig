@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détail du Commentaire {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('recette.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 border-0 rounded-4">
+        
+        {# 📌 Détails du Commentaire #}
+        <h3 class="text-center text-primary">Commentaire #{{ commentaire.id }}</h3>
+        <p class="text-muted text-center">
+            Publié par <strong>{{ commentaire.user.pseudo }}</strong> le {{ commentaire.createAt | date('d-m-Y à H:i') }}
+        </p>
+
+        {# 📸 Image de la Recette #}
+        {% if commentaire.recette.photo %}
+            <div class="text-center my-3">
+                <img src="{{ asset('uploads/recettes/' ~ commentaire.recette.photo) }}" alt="Image de la recette" class="img-fluid rounded recipe-image">
+            </div>
+        {% endif %}
+
+        {# 📌 Détails de la Recette liée #}
+        <div class="mt-4">
+            <h5 class="fw-bold">Recette associée :</h5>
+            <p>
+  
+                    {{ commentaire.recette.titre }}
+                </a>
+            </p>
+        </div>
+
+        {# 📝 Contenu du Commentaire #}
+        <div class="mt-4">
+            <h5 class="fw-bold">Commentaire :</h5>
+            <p class="text-dark">{{ commentaire.commentaire }}</p>
+        </div>
+
+        {# 🔘 Boutons d’actions #}
+        <div class="text-center mt-4 d-flex justify-content-center gap-3">
+            {# ✅ Bouton Valider #}
+            
+
+            {# ❌ Bouton Supprimer #}
+           
+
+            {# 🔙 Bouton Retour #}
+            <a href="{{ path('admin.commentaires.validation') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Retour 
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

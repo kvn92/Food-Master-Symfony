@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la Recette</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .recipe-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .author-date {
+            color: #6c757d;
+        }
+        .recipe-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .interaction-buttons .btn {
+            margin-right: 10px;
+        }
+        .section-title {
+            font-size: 1.75rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 5px;
+        }
+        .ingredients-list, .instructions-list {
+            margin-left: 20px;
+        }
+        .comment {
+            margin-bottom: 20px;
+        }
+        .comment .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <!-- En-tête de la recette -->
+    <header class="text-center mb-4">
+        <h1 class="recipe-title">{{recette.titre }}</h1>
+        <p class="author-date">{{ recette.createdAt | date('d-m-Y')}}</p>
+    </header>
+
+    <!-- Image principale de la recette -->
+    <div class="text-center">
+    <img src="{{ asset('uploads/recettes/' ~ recette.photo) }}" alt="Image de la recette" class="recipe-image">
+
+    <!-- Interactions utilisateur -->
+    <div class="interaction-buttons text-center mb-4"> 
+        <a href="{{ path('admin.recette.like', {id: recette.id})}}"> <button class="btn btn-primary"><i class="fas fa-thumbs-up"></i> J'aime ({{ recette.likeRecettes|length  }})</button></a>
+       
+       {% if recette.sauvergardeRecettes == true %}
+         <a href="{{ path('admin.recette.sauvegarder', {id: recette.id})}}"><button class="btn btn-success"><i class="fas fa-bookmark"></i> Ajouter aux favoris</button> </a>
+       {% endif %}
+         <a href="{{ path('admin.recette.sauvegarder', {id: recette.id})}}"> youj </a>
+        <button class="btn btn-info"><i class="fas fa-share"></i> Partager</button>
+    </div>
+
+    <!-- Description de la recette -->
+    <section>
+        <h2 class="section-title">Description</h2>
+        <p>Brève description de la recette mettant en avant ses particularités et son histoire.</p>
+    </section>
+
+    <!-- Détails de la recette -->
+    <section>
+        <p>Niveau : {{ recette.getNiveauLabel() }}</p>
+        <h2 class="section-title">Ingrédients</h2>
+        <ul class="ingredients-list">
+            <li>Ingrédient 1</li>
+            <li>Ingrédient 2</li>
+            <li>Ingrédient 3</li>
+            <!-- Autres ingrédients -->
+        </ul>
+
+<!--        <h2 class="section-title">Instructions</h2>
+        <ol class="instructions-list">
+            <li>Étape 1 des instructions de préparation.</li>
+            <li>Étape 2 des instructions de préparation.</li>
+            <li>Étape 3 des instructions de préparation.</li>-->
+            <!-- Autres étapes -->
+     <!--   </ol> -->
+    </section>
+
+    <!-- Section des commentaires -->
+    <section>
+        <h2 class="section-title">Commentaires {{  recette.commentaires |length }}</h2>
+
+        <!-- Formulaire d'ajout de commentaire -->
+        <div class="mb-4">
+            <h3>Ajouter un commentaire</h3>
+            
+            {{ form(form, {'method': 'POST'}) }}
+        </div>
+
+        <!-- Liste des commentaires existants -->
+     {% if commentaires is not empty %}
+    {% for commentaire in commentaires %}
+        <div class="comment p-3 mb-3 border rounded">
+            <div class="d-flex align-items-center">
+                <img src="{{ asset('uploads/users/' ~  commentaire.user.photo) }}" alt="Avatar de l'utilisateur" class="avatar me-2">
+                <div>
+                    <strong>{{ commentaire.user.pseudo }}</strong>
+                    <p class="mb-1">{{ commentaire.commentaire }}</p>
+                    <small class="text-muted">Posté le {{ commentaire.createdAt | date('d-m-Y') }}</small>
+                </div>
+            </div>
+
+            {% if commentaire.user.id == app.user.id %}
+                <div class="mt-2">
+                   
+                    <form method="post" action="{{ path('admin.commentaire.delete', {'id': commentaire.id}) }}" class="d-inline" onsubmit="return confirm('Voulez-vous vraiment supprimer ce commentaire ?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ commentaire.id) }}">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    {% endfor %}
+{% else %}
+    <p class="text-muted">Aucun commentaire pour le moment.</p>
+{% endif %}
+
+        <!-- Autres commentaires -->
+    </section>
+</div>
+
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

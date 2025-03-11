@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ titrePage }}
+{% endblock %}
+
+
+
+{% block body %}
+	<main class="container">
+
+		<header class="text-center my-4">
+			<h1 class="page-title">
+				<i class="fa fa-lemon" aria-hidden="true"></i> {{ titrePage }}
+			</h1>
+		</header>
+
+		<div class="d-flex justify-content-between align-items-right mb-4">
+			<a href="{{ path('admin.ingredient.new') }}" class="btn btn-success">
+				<i class="fa fa-plus-circle"></i> Ajouter un ingrédient
+			</a>
+		</div>
+
+		{# Statistiques des ingrédients #}
+		<section class="col-md-10 mx-auto">
+			<div class="row text-center my-4">
+				<article class="col-md-4">
+					<div class="card shadow-sm border-primary">
+						<div class="card-body">
+							<h3 class="text-primary">
+								<i class="fa fa-list"></i> {{ stats.total }}
+							</h3>
+							<p class="text-muted">Total des ingrédients</p>
+						</div>
+					</div>
+				</article>
+
+				<article class="col-md-4">
+					<div class="card shadow-sm border-success">
+						<div class="card-body">
+							<h3 class="text-success">
+								<i class="fa fa-check-circle"></i> {{ stats.actives }}
+							</h3>
+							<p class="text-muted">Ingrédients activés</p>
+						</div>
+					</div>
+				</article>
+
+				<article class="col-md-4">
+					<div class="card shadow-sm border-danger">
+						<div class="card-body">
+							<h3 class="text-danger">
+								<i class="fa fa-times-circle"></i> {{ stats.inactives }}
+							</h3>
+							<p class="text-muted">Ingrédients désactivés</p>
+						</div>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		{# Tableau des ingrédients #}
+		<!--<h2 class="section-title text-center mt-5">
+			<i class="fa fa-book"></i> Liste des ingrédients
+		</h2> -->
+
+		<table class="table table-striped table-bordered shadow-sm">
+			<thead class="table-dark text-center">
+				<tr>
+					<th>Ingrédient</th>
+					<th>Statuts</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ingredient in ingredients %}
+					<tr>
+						<td class="align-middle text-center">{{ ingredient.ingredient|capitalize }}</td>
+						<td class="align-middle text-center">
+							{% if ingredient.isActive %}
+								<a href="{{ path('admin.ingredient.toggle.status', { id: ingredient.id }) }}" title="Désactiver">
+									<span class="badge bg-success">
+										<i class="fa fa-check"></i> Actif
+									</span>
+								</a>
+							{% else %}
+								<a href="{{ path('admin.ingredient.toggle.status', { id: ingredient.id }) }}" title="Activer">
+									<span class="badge bg-danger">
+										<i class="fa fa-times"></i> Inactif
+									</span>
+								</a>
+							{% endif %}
+						</td>
+						<td class="align-middle text-center d-flex justify-content-center gap-2">
+							<a href="{{ path('admin.ingredient.edit', { id: ingredient.id }) }}" class="btn btn-warning btn-sm">
+								<i class="fa fa-pencil-alt"></i> Modifier
+							</a>
+
+							<form action="{{ path('admin.ingredient.delete', {id: ingredient.id}) }}" method="post" style="display:inline;">
+								<input type="hidden" name="_token" value="{{ csrf_token('delete_ingredient_' ~ ingredient.id) }}">
+								<button type="submit" class="btn btn-danger" onclick="return confirm('Voulez-vous vraiment supprimer cet ingrédient ?');">
+									<i class="fa fa-trash"></i> Supprimer
+								</button>
+							</form>
+						</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3" class="text-center text-muted">
+							<i class="fa fa-info-circle"></i> Aucun ingrédient enregistré.
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</main>
+{% endblock %}

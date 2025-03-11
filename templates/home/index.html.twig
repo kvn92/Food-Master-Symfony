@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | Plateforme de Recettes{% endblock %}
+
+{% block body %}
+
+<div class="container-lg mt-4">
+    <!-- ✅ Section Hero -->
+    <section class="hero mb-5 position-relative text-white d-flex align-items-center justify-content-center text-center">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="fw-bold">Découvrez les meilleures recettes partagées par la communauté</h1>
+            <p class="lead">Rejoignez-nous et proposez vos propres créations !</p>
+            <a href="#" class="btn btn-primary btn-lg mt-3">Partager une recette</a>
+        </div>
+    </section>
+
+    <div class="row">
+        <div class="col-lg-10 mx-auto">
+            
+            <!-- ✅ Section Dernières Recettes -->
+            <section>
+                <h2 class="text-center mb-4">📌 Dernières Recettes</h2>
+                <div class="row g-4">
+                    {% for recette in recettesDerniereSortie %}
+                        <div class="col-md-3">
+                            <article class="card recipe-card shadow-sm">
+                                <img src="{{ asset('uploads/recettes/' ~ recette.photo) }}" class="card-img-top img-fluid" alt="{{ recette.titre }}">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title">{{ recette.titre }}</h5>
+                                </div>
+                                <div class="card-footer d-flex align-items-center justify-content-between">
+                                    <div class="d-flex align-items-center">
+                                        <img src="{{ asset('uploads/users/' ~ recette.user.photo) }}" class="user-avatar" alt="{{ recette.user.pseudo }}">
+                                        <span class="ms-2">{{ recette.user.pseudo }}</span>
+                                    </div>
+                                    <div class="likes">
+                                        <i class="fas fa-heart"></i> {{ recette.likeRecettes|length }}
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- ✅ Section Recettes Populaires -->
+            <section class="mt-5">
+                <h2 class="text-center mb-4">🔥 Recettes Populaires</h2>
+                <div class="row g-4">
+                    {% for recette in recettesPopulaires %}
+                       <div class="col-md-3">
+    <article class="card recipe-card shadow-sm">
+        <!-- ✅ Image de la recette (Ajout de .recipe-img) -->
+        <img src="{{ asset('uploads/recettes/' ~ recette.photo) }}" class="card-img-top recipe-img" alt="{{ recette.titre }}">
+
+        <div class="card-body text-center">
+            <h5 class="card-title">{{ recette.titre }}</h5>
+        </div>
+
+        <div class="card-footer d-flex align-items-center justify-content-between">
+            <!-- ✅ Avatar de l'utilisateur (Ajout de .user-avatar et .user-info) -->
+            <div class="user-info">
+                <img src="{{ asset('uploads/users/' ~ recette.user.photo) }}" class="user-avatar" alt="{{ recette.user.pseudo }}">
+                <span>{{ recette.user.pseudo }}</span>
+            </div>
+
+            <div class="likes">
+                <i class="fas fa-heart"></i> {{ recette.likeRecettes|length }}
+            </div>
+        </div>
+    </article>
+</div>
+
+                    {% endfor %}
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,5 @@
+zenstruck_foundry:
+    auto_refresh_proxies: true
+    auto_persist: true
+    faker:
+        locale: fr_FR

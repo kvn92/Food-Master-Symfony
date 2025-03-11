@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="So Yummy Style - Découvrez les meilleures recettes et partagez votre passion pour la cuisine !">
+    <meta property="og:title" content="{% block title %}So Yummy Style{% endblock %}">
+    <meta property="og:description" content="Découvrez et partagez les meilleures recettes avec So Yummy Style.">
+    <meta property="og:image" content="{{ asset('uploads/logo/food.png') }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+
+    <!-- ✅ Import Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
+
+    <!-- ✅ CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- ✅ Styles personnalisés -->
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    <!-- ✅ Styles spécifiques aux pages -->
+    {% block stylesheets %}{% endblock %}
+            {{ encore_entry_link_tags('app') }}
+</head>
+<body>
+
+    <!-- ✅ HEADER -->
+    <header class="mb-4">
+        <div class="container-fluid">
+            {% include 'main/menu.html.twig' %}
+        </div>
+    </header>
+
+    <!-- ✅ Flash messages section -->
+    <div class="container mt-3">
+        {% include 'partials/flash.html.twig' %}
+    </div>
+
+    <!-- ✅ CONTENU PRINCIPAL -->
+    <main id="main-content" class="container py-2">
+        {% block body %}{% endblock %}
+    </main>
+
+    <!-- ✅ FOOTER -->
+    <footer class="footer text-white mt-5 py-4">
+        <div class="container-fluid">
+            {% include 'main/footer.html.twig' %}
+        </div>
+    </footer>
+
+    <!-- ✅ JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+
+    <!-- ✅ Scripts spécifiques aux pages -->
+    {% block javascripts %}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
+</body>
+</html>

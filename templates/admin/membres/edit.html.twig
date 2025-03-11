@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ titrePage }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('recette.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg">
+                <div class="card-header  text-white text-center">
+                    <h3><i class="fas fa-user-edit"></i>Ajouter un utilisateur</h3>
+                </div>
+                <div class="card-body">
+                    {{ form_start(form, {'method': 'POST', 'attr': {'enctype': 'multipart/form-data'}}) }}
+
+                  
+                    {{ form_row(form.pseudo, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+                    
+<div class="mb-3">
+                        <label for="description" class="form-label"><i class="fas fa-user-tag"></i> Description</label>
+                        {{ form_widget(form.description, {'attr': {'class': 'form-select'}}) }}
+                    </div>
+
+                    <!-- Gestion des rôles -->
+                    <div class="mb-3">
+                        <label for="roles" class="form-label"><i class="fas fa-user-tag"></i> Rôles</label>
+                        {{ form_widget(form.roles, {'attr': {'class': 'form-select'}}) }}
+                    </div>
+
+                    <!-- Mot de passe (facultatif en modification) -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label"><i class="fas fa-lock"></i> Nouveau mot de passe</label>
+                        {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+                        <small class="form-text text-muted">Laissez vide pour ne pas changer le mot de passe.</small>
+                    </div>
+
+                    <!-- Gestion de la photo de profil -->
+                    <div class="mb-3">
+                        <label for="photo" class="form-label"><i class="fas fa-camera"></i> Photo de profil</label>
+                        {{ form_widget(form.photo, {'attr': {'class': 'form-control', 'onchange': 'previewAvatar(event)'}}) }}
+                    </div>
+<div class="form-check form-switch">
+    {{ form_widget(form.isActive, {'attr': {'class': 'form-check-input'}}) }}
+    <label class="form-check-label" for="{{ form.isActive.vars.id }}">{{ form.isActive.vars.label }}</label>
+</div>
+
+                    <!-- Boutons d'action -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a href="{{ path('admin.membres.show', {'id': app.user.id}) }}" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Retour</a>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Enregistrer</button>
+                    </div>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script pour prévisualisation de l'avatar -->
+<script>
+    function previewAvatar(event) {
+        const avatarPreview = document.getElementById('avatarPreview');
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                avatarPreview.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    }
+</script>
+
+{% endblock %}

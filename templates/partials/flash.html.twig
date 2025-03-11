@@ -1,0 +1,20 @@
+
+
+
+<div class="container mt-3">
+    {% set alertTypes = {
+        'success': 'success',
+        'error': 'danger',
+        'warning': 'warning',
+        'info': 'info'
+    } %}
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ alertTypes[type] | default('secondary') }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>

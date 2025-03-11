@@ -1,0 +1,38 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+app_home:
+    path: / 
+    controller: App\Controller\HomeController::index
+
+api_login:
+    path: /api/login
+    controller: App\Controller\Api\AuthController::login
+    methods: POST
+
+api_register:
+    path: /api/register
+    controller: App\Controller\Api\RegisterController::register
+    methods: POST
+
+api_profile:
+    path: /api/profile
+    controller: App\Controller\Api\MembreController::getProfile
+    methods: GET
+
+
+
+api_profile_update:
+    path: /api/profile/update
+    controller: App\Controller\Api\MembreController::updateProfile
+    methods: ['PUT','PATCH']
+
+get_commentaires:
+    path: /api/commentaires
+    controller: CommentaireController::index
+    methods: GET
+
+

@@ -1,0 +1,117 @@
+
+{% block title %}
+	{{ titrePage }}
+{% endblock %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('recette.css') }}">
+{% endblock %}
+       
+
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="container dashboard-container">
+    <h1 class="text-center mb-4">{{ titrePage }}</h1>
+
+    <!-- Section 1 : Gestion principale -->
+    <section class="section-box">
+        <h2 class="text-center">Gestion principale</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <a href="{{ path('admin.membre.index') }}">
+                    <div class="card bg-primary text-white p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3>Gestion des Membres</h3>
+                                <p class="fs-4">
+                                {% if statsMembres.total == false %}
+                                    0 Membres
+                                {% endif %}
+                                {{ statsMembres.total }}</p>
+                            </div>
+                            <i class="fas fa-users icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <a href="{{ path('admin.recette.index') }}">
+                    <div class="card bg-success text-white p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3>Gestion des Recettes</h3>
+
+                                <p class="fs-4">{% if statsRecettes.actives == false %}
+                                    0  Recettes
+                                {% endif %}{{ statsRecettes.actives }}</p>
+                            </div>
+                            <i class="fas fa-utensils icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-4">
+                <a href="{{ path('admin.setting') }}">
+                    <div class="card bg-warning text-white p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3>Paramètres</h3>
+                                <p class="fs-4">Configuration</p>
+                            </div>
+                            <i class="fas fa-cog icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2 : Validation -->
+    <section class="section-box">
+        <h2 class="text-center">Validation</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-5">
+                <a href="{{ path('admin.recette.validation') }}">
+                    <div class="card bg-danger text-white p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3>Validation des Recettes</h3>
+                                <p class="fs-4">
+                                    {% if statsRecettes.inactives ==  false %}
+                                         Aucune à l'attente
+                                    {% endif %}
+                                {{ statsRecettes.inactives }}</p>
+                            </div>
+                            <i class="fas fa-check-circle icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-6 col-lg-5">
+                <a href="{{ path('admin.commentaire.validation') }}">
+                    <div class="card bg-info text-white p-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h3>Validation des Commentaires</h3>
+                                <p class="fs-4"> {% if statsCommentaires.inactives == true %}
+                                    Aucune à l'attente
+                                {% endif %}
+                                {{ statsCommentaires.inactives }}</p>
+                            </div>
+                            <i class="fas fa-comments icon"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion | So Yummy Style{% endblock %}
+
+{% block body %}
+<section class="d-flex justify-content-center align-items-center vh-100">
+    <article class="card shadow-lg p-5" 
+         style="max-width: 450px; width: 100%; background: white; border-radius: 16px; border: none;">
+        
+        <header class="text-center mb-4">
+            <h1 class="fw-bold" style="color: #DB3512;">Bienvenue ! 🍰</h1>
+            <p class="text-muted">Connectez-vous pour découvrir de délicieuses recettes !</p>
+        </header>
+
+        <form method="post">
+            {% if error %}
+                <div class="alert alert-danger text-center">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+
+            {% if app.user %}
+                <aside class="alert alert-info text-center">
+                    Vous êtes connecté en tant que <strong>{{ app.user.userIdentifier }}</strong>, 
+                    <a href="{{ path('app_logout') }}" class="text-decoration-none" style="color: #DB3512;">
+                        Déconnexion
+                    </a>
+                </aside>
+            {% endif %}
+
+            <fieldset>
+                <legend class="visually-hidden">Formulaire de connexion</legend>
+
+                <!-- Champ Email -->
+                <div class="mb-3">
+                    <label for="username" class="form-label fw-bold">Email</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0 rounded-start">
+                            <i class="fas fa-envelope" style="color: #DB3512;"></i>
+                        </span>
+                        <input type="email" value="{{ last_username }}" name="_username" id="username"
+                               class="form-control border-0 shadow-sm" autocomplete="email" required autofocus
+                               style="border-radius: 8px;">
+                    </div>
+                </div>
+
+                <!-- Champ Mot de Passe -->
+                <div class="mb-3">
+                    <label for="password" class="form-label fw-bold">Mot de passe</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0 rounded-start">
+                            <i class="fas fa-lock" style="color: #DB3512;"></i>
+                        </span>
+                        <input type="password" name="_password" id="password"
+                               class="form-control border-0 shadow-sm" autocomplete="current-password" required
+                               style="border-radius: 8px;">
+                    </div>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <!-- Checkbox "Se souvenir de moi" -->
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" name="_remember_me" id="_remember_me">
+                    <label class="form-check-label text-muted" for="_remember_me">Se souvenir de moi</label>
+                </div>
+            </fieldset>
+
+            <!-- Bouton de Connexion -->
+            <div class="d-grid">
+                <button class="btn btn-lg text-white shadow-sm" type="submit"
+                        style="background-color: #DB3512; border-radius: 12px;">
+                    <i class="fas fa-sign-in-alt"></i> Se connecter
+                </button>
+            </div>
+        </form>
+
+        <!-- Lien vers l'inscription -->
+        <nav class="text-center mt-3">
+            <a href="{{ path('app_register') }}" class="text-decoration-none fw-bold"
+               style="color: #DB3512;">Pas encore de compte ? Inscrivez-vous</a>
+        </nav>
+    </article>
+</section>
+{% endblock %}

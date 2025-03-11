@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription | So Yummy Style{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-5" 
+         style="max-width: 450px; width: 100%; background: white; border-radius: 16px; border: none;">
+        
+        <div class="text-center mb-4">
+            <h2 class="fw-bold" style="color: #DB3512;">Rejoignez-nous ! 🍽️</h2>
+            <p class="text-muted">Inscrivez-vous pour partager et découvrir de délicieuses recettes !</p>
+        </div>
+
+        {{ form_start(registrationForm) }}
+
+        <!-- Affichage des erreurs -->
+        {% if registrationForm.vars.errors|length > 0 %}
+            <div class="alert alert-danger text-center">
+                {{ form_errors(registrationForm) }}
+            </div>
+        {% endif %}
+
+        <!-- Champ Pseudo -->
+        <div class="mb-3">
+            <label for="{{ registrationForm.pseudo.vars.id }}" class="form-label fw-bold">Pseudo</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light border-0 rounded-start">
+                    <i class="fas fa-user-plus" style="color: #DB3512;"></i>
+                </span>
+                {{ form_widget(registrationForm.pseudo, { 'attr': {
+                    'class': 'form-control border-0 shadow-sm',
+                    'style': 'border-radius: 8px;',
+                    'autocomplete': 'username'
+                } }) }}
+            </div>
+        </div>
+
+        <!-- Champ Email -->
+        <div class="mb-3">
+            <label for="{{ registrationForm.email.vars.id }}" class="form-label fw-bold">Email</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light border-0 rounded-start">
+                    <i class="fas fa-envelope" style="color: #DB3512;"></i>
+                </span>
+                {{ form_widget(registrationForm.email, { 'attr': {
+                    'class': 'form-control border-0 shadow-sm',
+                    'style': 'border-radius: 8px;',
+                    'autocomplete': 'email'
+                } }) }}
+            </div>
+        </div>
+
+        <!-- Champ Mot de Passe -->
+        <div class="mb-3">
+            <label for="{{ registrationForm.plainPassword.vars.id }}" class="form-label fw-bold">Mot de passe</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light border-0 rounded-start">
+                    <i class="fas fa-lock" style="color: #DB3512;"></i>
+                </span>
+                {{ form_widget(registrationForm.plainPassword, { 'attr': {
+                    'class': 'form-control border-0 shadow-sm',
+                    'style': 'border-radius: 8px;',
+                    'autocomplete': 'new-password'
+                } }) }}
+            </div>
+        </div>
+
+        <!-- Checkbox Conditions générales -->
+        <div class="form-check mb-3">
+            {{ form_widget(registrationForm.agreeTerms, { 'attr': { 'class': 'form-check-input' } }) }}
+            <label class="form-check-label text-muted" for="{{ registrationForm.agreeTerms.vars.id }}">
+                J'accepte les <a href="#" class="text-decoration-none" style="color: #DB3512;">conditions générales</a>
+            </label>
+        </div>
+
+        <!-- Reste des champs cachés du formulaire -->
+        {{ form_rest(registrationForm) }}
+
+        <!-- Bouton d'inscription -->
+        <div class="d-grid">
+            <button class="btn btn-lg text-white shadow-sm" type="submit"
+                    style="background-color: #DB3512; border-radius: 12px;">
+                <i class="fas fa-user-plus"></i> S'inscrire
+            </button>
+        </div>
+
+        {{ form_end(registrationForm) }}
+
+        <!-- Lien vers la connexion -->
+        <div class="text-center mt-3">
+            <a href="{{ path('app_login') }}" class="text-decoration-none fw-bold"
+               style="color: #DB3512;">Déjà un compte ? Connectez-vous</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

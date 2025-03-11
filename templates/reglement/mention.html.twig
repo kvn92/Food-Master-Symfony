@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mentions Légales{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h1 class="text-center text-danger fw-bold">Mentions Légales</h1>
+        <p class="text-muted text-center">Dernière mise à jour : {{ datePublication }}</p>
+
+        <h3 class="mt-4">1. Informations générales</h3>
+        <p>Nom du site : So Yummy Style...</p>
+
+        <h3 class="mt-4">2. Hébergement</h3>
+        <p>Le site est hébergé par...</p>
+
+        <h3 class="mt-4">3. Propriété intellectuelle</h3>
+        <p>Les contenus du site sont protégés par le droit de la propriété intellectuelle...</p>
+
+        <div class="text-center mt-4">
+            <a href="{{ path('app_home') }}" class="btn btn-danger">Retour à l'accueil</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{ membre.pseudo }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="card shadow-lg p-4">
+        <div class="row">
+            <!-- Colonne gauche : Photo -->
+            <div class="col-md-4 text-center">
+                {% if membre.photo is not empty %}
+                    <img src="{{ asset('uploads/users/' ~ membre.photo) }}" alt="{{ membre.pseudo }}" 
+                         class="img-fluid rounded-circle shadow-sm" 
+                         style="width: 150px; height: 150px; object-fit: cover;">
+                {% else %}
+                    <img src="{{ asset('images/default-avatar.png') }}" alt="Avatar par défaut" 
+                         class="img-fluid rounded-circle shadow-sm" 
+                         style="width: 150px; height: 150px; object-fit: cover;">
+                {% endif %}
+                <h3 class="mt-3">{{ membre.pseudo }}</h3>
+            </div>
+
+            <!-- Colonne droite : Infos -->
+            <div class="col-md-8">
+                <h4><i class="fas fa-envelope"></i> Email :</h4>
+                <p>{{ membre.email }}</p>
+
+                <h4><i class="fas fa-info-circle"></i> Description :</h4>
+                {% if membre.description is empty %}
+                    <p class="text-muted">Aucune description fournie.</p>
+                {% else %}
+                    <p>{{ membre.description }}</p>
+                {% endif %}
+
+                <h4><i class="fas fa-book"></i> Recettes publiées :</h4>
+                {% if membre.recettes|length < 1 %}
+                    <p class="text-muted">Aucune recette publiée.</p>
+                {% else %}
+                    <p>{{ membre.recettes|length }} recettes publiées.</p>
+                {% endif %}
+
+                <h4><i class="fas fa-heart"></i> Recettes favorites :</h4>
+                {% if membre.sauvergardeRecettes|length < 1 %}
+                    <p class="text-muted">Aucune recette en favoris.</p>
+                {% else %}
+                    <p>{{ membre.sauvergardeRecettes|length }} recettes en favoris.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        {% if app.user and app.user != membre %}
+    <form action="{{ path('follow.toggle', { id: membre.id }) }}" method="POST" class="d-inline">
+        <button type="submit" class="btn {% if app.user in membre.followers %}btn-danger{% else %}btn-success{% endif %}">
+            {% if app.user in membre.followers %}
+                <i class="fas fa-user-minus"></i> Se désabonner
+            {% else %}
+                <i class="fas fa-user-plus"></i> Suivre
+            {% endif %}
+        </button>
+    </form>
+{% endif %}
+
+
+        <!-- ✅ Section des tableaux -->
+        <div class="row mt-4">
+            <!-- Tableau des recettes publiées -->
+            <div class="col-md-6">
+                <h3 class="text-center">Mes recettes</h3>
+                <table class="table table-hover shadow-sm">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th>Titre</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for recette in recettes %}
+                            <tr class="align-middle text-center">
+                                <td>{{ recette.titre }}</td>
+                                <td>{{ recette.createAt | date('d-m-Y') }}</td>
+                                <td>
+                                    <a href="{{ path('recette.show', { id: recette.id }) }}" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-eye"></i> Voir
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center">Aucune recette publiée.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tableau des recettes favorites -->
+            <div class="col-md-6">
+                <h3 class="text-center">Liste de Favoris</h3>
+                <table class="table table-hover shadow-sm">
+                    <thead class="table-dark text-center">
+                        <tr>
+                            <th>Titre</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for favori in membre.sauvergardeRecettes %}
+                            <tr class="align-middle text-center">
+                                <td>{{ favori.recette.titre }}</td>
+                                <td>{{ favori.recette.createAt | date('d-m-Y') }}</td>
+                                <td>
+                                    <a href="{{ path('recette.show', { id: favori.recette.id }) }}" class="btn btn-primary btn-sm">
+                                        <i class="fa fa-eye"></i> Voir
+                                    </a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center">Aucune recette en favoris.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
