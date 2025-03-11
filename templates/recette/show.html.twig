@@ -58,7 +58,7 @@
 
     <!-- Image principale de la recette -->
     <div class="text-center">
-    <img src="{{ asset('uploads/recettes/' ~ recette.photo) }}" alt="Image de la recette" class="recipe-image">
+    <img src="{{ asset('uploads/recettes/' ~ recette.photo) }}" alt="{{ recette.titre }}" class="recipe-image">
 
     <!-- Interactions utilisateur -->
     <div class="interaction-buttons text-center mb-4"> 
@@ -81,6 +81,7 @@
     <section>
         <p>Niveau : {{ recette.getNiveauLabel() }}</p>
         <h2 class="section-title">Ingrédients</h2>
+        
         <ul class="ingredients-list">
             <li>Ingrédient 1</li>
             <li>Ingrédient 2</li>
@@ -88,13 +89,7 @@
             <!-- Autres ingrédients -->
         </ul>
 
-<!--        <h2 class="section-title">Instructions</h2>
-        <ol class="instructions-list">
-            <li>Étape 1 des instructions de préparation.</li>
-            <li>Étape 2 des instructions de préparation.</li>
-            <li>Étape 3 des instructions de préparation.</li>-->
-            <!-- Autres étapes -->
-     <!--   </ol> -->
+
     </section>
 
     <!-- Section des commentaires -->

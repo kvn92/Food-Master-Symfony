@@ -46,7 +46,7 @@
         {% if app.user %}
           {% if is_granted('ROLE_USER') %}
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                 👤 {{ app.user.email }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">

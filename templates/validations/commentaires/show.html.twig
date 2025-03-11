@@ -19,7 +19,7 @@
         {# 📸 Image de la Recette #}
         {% if commentaire.recette.photo %}
             <div class="text-center my-3">
-                <img src="{{ asset('uploads/recettes/' ~ commentaire.recette.photo) }}" alt="Image de la recette" class="img-fluid rounded recipe-image">
+                <img src="{{ asset('uploads/recettes/' ~ commentaire.recette.photo) }}" alt="{{ recette.titre }}" class="img-fluid rounded recipe-image">
             </div>
         {% endif %}
 
